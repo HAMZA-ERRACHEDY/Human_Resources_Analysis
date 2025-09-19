@@ -63,25 +63,25 @@ SET age = TIMESTAMPDIFF(YEAR, birthdate, CURDATE()) ;
 
 -- QUESTIONS
 
--- 1. What is the gender breakdown of employees in the company?
-
+**1. What is the gender breakdown of employees in the company?**
+```sql
 SELECT  gender,
 COUNT(*) AS count
 FROM human_resources
 WHERE age >= 18 and termdate IS NULL
 GROUP BY gender ;
-
--- 2. What is the race/ethnicity breakdown of employees in the company?
-
+```
+**2. What is the race/ethnicity breakdown of employees in the company?**
+```sql
 SELECT race,
 COUNT(*) AS count
 FROM human_resources
 WHERE age >= 18 and termdate IS NULL
 GROUP BY race 
 ORDER BY count DESC;
-
--- 3. What is the age distribution of employees in the company?
-
+```
+**3. What is the age distribution of employees in the company?**
+```sql
 SELECT  MIN(age) AS Yongest , 
 		MAX(age) AS Oldest
 FROM human_resources;
@@ -112,40 +112,40 @@ FROM human_resources
 WHERE age >= 18 and termdate IS NULL
 GROUP BY age_group , gender
 ORDER BY age_group , gender;
-
--- 4. How many employees work at headquarters versus remote locations?
-
+```
+**4. How many employees work at headquarters versus remote locations?**
+```sql
 SELECT location, COUNT(emp_id) count
 FROM human_resources
 WHERE age >= 18 and termdate IS NULL
 GROUP BY location;
-
--- 5. What is the average length of employment for employees who have been terminated?
-
+```
+**5. What is the average length of employment for employees who have been terminated?**
+```sql
 SELECT
 ROUND(AVG(TIMESTAMPDIFF(YEAR, hire_date, termdate))) AS avg_leng 
 FROM human_resources
 WHERE termdate <= CURDATE() and age >= 18 and termdate IS NOT NULL ;
-
--- 6. How does the gender distribution vary across departments?
-
+```
+**6. How does the gender distribution vary across departments?**
+```sql
 SELECT department, gender, COUNT(*) AS count
 FROM human_resources 
 WHERE age >= 18 and termdate IS NOT NULL 
 GROUP BY department, gender
 ORDER BY department ;
+```
 
-
--- 7. What is the distribution of job titles across the company?
-
+**7. What is the distribution of job titles across the company?**
+```sql
 SELECT jobtitle, COUNT(*) AS count
 FROM human_resources 
 WHERE age >= 18 and termdate IS NOT NULL 
 GROUP BY jobtitle 
 ORDER BY jobtitle;
-
--- 8. Which department has the highest turnover rate?
-
+```
+**8. Which department has the highest turnover rate?**
+```sql
 SELECT 
 	department,
 	total_count,
@@ -161,7 +161,7 @@ FROM (
 	GROUP BY department
 	) AS subquery
 ORDER BY terminated_rate DESC;
-
+```
 **9. What is the distribution of employees across locations by state?**
 ```sql
 SELECT
